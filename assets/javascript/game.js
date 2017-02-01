@@ -2,12 +2,31 @@
       // Creates an array that lists out all of the options (Rock, Paper, or Scissors).
       
 	function displayStatus(inst, win, loss, guess, lttr, word) {
+    var formatWord = "";
+    var formatLetter = "";
+    
+
+
+    for (var q = 0; q < word.length; q++) {
+      formatWord += word[q] + " ";
+    }
+
+
+    for (var r = 0; r < lttr.length; r++) {
+      if (r > 1) {
+        console.log(r + " is adding a comma formatLetter = " + formatLetter);
+        formatLetter += ", ";}
+
+      formatLetter += lttr[r];    
+    }
+
+
 		document.getElementById ("instruction").innerHTML = inst; 	
     document.getElementById ("winDisplay").innerHTML = win;   
     document.getElementById ("lossDisplay").innerHTML = loss;   
-    document.getElementById ("wordDisplay").innerHTML = word;   
+    document.getElementById ("wordDisplay").innerHTML = formatWord;   
     document.getElementById ("guessesDisplay").innerHTML = guess;   
-    document.getElementById ("usedLetters").innerHTML = lttr;   
+    document.getElementById ("usedLetters").innerHTML = formatLetter;   
     } 
 
 
@@ -58,16 +77,19 @@
               
 }
 	 
-
+      // var counters {};
+      var instruct;
+      var firstClick = 0
       var instruct;
       var winCount = 0;
       var lossCount = 0;
+      var gameCount = 0;
       var wordOptions = ["incredible", "edible"];
       var wordsPlayed = [];
       var guessCount = 10;
       var lettersGuess = []; // array of all letters guessed so far
-      var currentWord;  // houses an array of the word being guessed
-      var correctLetters; //displays on screen to open and guessed letters in a word
+      var currentWord = [" "];  // houses an array of the word being guessed
+      var correctLetters = [" "]; //displays on screen to open and guessed letters in a word
     
 
    instruct = "Press any key to get started";
@@ -75,26 +97,39 @@
 
  // This function is run whenever the user presses a key at the beginning of the game
    document.onkeyup = function(event) {
-      guessCount = 10;
-      lettersGuess = [" "]; // array of all letters guessed so far
-      currentWord.length = 0  // houses an array of the word being guessed
-      correctLetters.lenght = 0; //displays on screen to open and guessed letters in a word
-    
-		  console.log("user key hit to start game");
-      selectWord(wordsPlayed);
-            console.log("word back to key" + currentWord.toString());
-      setWordDisplay(currentWord);
-               console.log("word back to key " + correctLetters.toString());
-     var  instruct = "Please take a guess";
-      displayStatus(instruct, winCount, lossCount, guessCount, lettersGuess, correctLetters);
+      var userInp = String.fromCharCode(event.keyCode).toLowerCase();
+      console.log("firstClick " + firstClick + ", gameCount " +gameCount + ", options lenght" + wordOptions.length );
+      // if (firstClick == 0 && gameCount < wordOptions.lenght - 1 ) {
+        if (firstClick == 0 ) {
+          console.log("inside firstclick = 0 and games left to play")
+          guessCount = 10;
+          lettersGuess = [" "]; // array of all letters guessed so far
+          firstClick++;
+          gameCount ++;
+    		  console.log("user key hit to start game game count" + gameCount);
+          selectWord(wordsPlayed);
+          console.log("word back to key" + currentWord.toString());
+          setWordDisplay(currentWord);
+          console.log("word back to key " + correctLetters.toString());
+          instruct = "Please take a guess";
+          displayStatus(instruct, winCount, lossCount, guessCount, lettersGuess, correctLetters);}
+
+      // else if (firstClick == 0 && gameCount > wordOptions.lenght - 1 ) {
+      //    console.log("inside firstclick = 0 and NOOOO games left to play")
+      //     guessCount = 10;
+      //      gameCount = 0;
+      //      instruct = "You have guessed all the words!  Thank you for playing";
+      //      displayStatus(instruct, winCount, lossCount, guessCount, lettersGuess, correctLetters);}
       
 
-   document.onkeyup = function(event) {
+      else { 
+          
           var userInp = event.key;
           console.log("game being played.  User input " + userInp);
           console.log("lettersGuess index " + lettersGuess.indexOf(userInp));
+          console.log("message displayed " + instruct);
 
-      if (lettersGuess.indexOf(userInp) == -1 ) { //if letter not already guessed
+          if (lettersGuess.indexOf(userInp) == -1 ) { //if letter not already guessed
        //Sets loop for as long as a guess is available
       // for (n = guessCount; n > 0; n--) { //do it here or at the end?
               console.log("letter was not guessed already");
@@ -111,23 +146,31 @@
                 console.log("letter is not in word");
                 guessCount--;                 // subtract # of guesses
               }
-        } else {
-          console.log("letter was guessed already");
+           } else {
+                console.log("letter was guessed already");
         
-      
+          }
+                console.log("finished loop");
 
-        
+              if (correctLetters.indexOf("_") == -1) {
+              instruct = "GAME IS OVER!  YOU WON";
+                    currentWord.length = 0  // houses an array of the word being guessed
+                    correctLetters.lenght = 0; //displays on screen to open and guessed letters in a word
+                    winCount++;
+                    firstClick = 0;
 
-           }
+         
 
-      if (correctLetters.indexOf("_") == -1) {
-      instruct = "GAME IS OVER!  YOU WON";
-
-      } else if (guessCount <= 0) {
-        instruct = "GAME IS OVER!  YOU LOST.  THE WORD WAS";
-      }  
-   
-         displayStatus(instruct, winCount, lossCount, guessCount, lettersGuess, correctLetters);}
+              } else if (guessCount <= 0) {
+                    instruct = "GAME IS OVER!  YOU LOST.  THE WORD WAS";
+                          currentWord.length = 0  // houses an array of the word being guessed
+                    correctLetters.lenght = 0; //displays on screen to open and guessed letters in a word
+                    lossCount++;
+                    firstClick = 0;
+              }  
+           
+                 displayStatus(instruct, winCount, lossCount, guessCount, lettersGuess, correctLetters);
+          }
        }
     
 
