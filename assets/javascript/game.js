@@ -26,9 +26,20 @@
     document.getElementById ("lossDisplay").innerHTML = loss;   
     document.getElementById ("wordDisplay").innerHTML = formatWord;   
     document.getElementById ("guessesDisplay").innerHTML = guess;   
-    document.getElementById ("usedLetters").innerHTML = formatLetter;   
-    } 
+    document.getElementById ("usedLetters").innerHTML = formatLetter; 
+    // document.getElementByID ("music").innerHTML = 
+}
 
+
+// Check to see if input was a letter
+  function checkUserInput (inp) {
+    if ((inp > 64 && inp <91) || (inp > 96 && inp < 123)) {
+      return true;
+      console.log("input is true");
+      }
+      else {return false; }
+      console.log("input is false");
+    }
 
 
 
@@ -68,14 +79,24 @@
            var arrayhold = [];
            console.log("populating __" + currentWord.length)
             for (var i = 0; i < currentWord.length; i++) {                   
-                   arrayhold[i] = "_";   
+                   if (currentWord[i] == " ") {
+                    arrayhold[i] = currentWord[i];
+
+                   }
+                    else { arrayhold[i] = "_";}   
+
                     console.log(arrayhold[i])}  
                   correctLetters = arrayhold;
-                  console.log("letters to be displayed inside function ");
+                  console.log("letters to be displayed inside function "+ correctLetters.toString());
                    return correctLetters;
-                   // return correctLetters;
+                  
               
-}
+  }
+
+
+
+
+//  BEGIN EXECUTION SECTION 
 	 
       // var counters {};
       var instruct;
@@ -84,12 +105,14 @@
       var winCount = 0;
       var lossCount = 0;
       var gameCount = 0;
-      var wordOptions = ["incredible", "edible"];
+      var wordOptions = ["Golden Girls", "The Cosby Show", "The Facts of Life", "Cheers"];
+      // var musicstored = "http://www.sitcomsonline.com/sounds/thegoldenpalace.mp3";
       var wordsPlayed = [];
       var guessCount = 10;
       var lettersGuess = []; // array of all letters guessed so far
       var currentWord = [" "];  // houses an array of the word being guessed
       var correctLetters = [" "]; //displays on screen to open and guessed letters in a word
+      var lowerCaseWord;
     
 
    instruct = "Press any key to get started";
@@ -98,58 +121,71 @@
  // This function is run whenever the user presses a key at the beginning of the game
    document.onkeyup = function(event) {
       var userInp = String.fromCharCode(event.keyCode).toLowerCase();
-      console.log("firstClick " + firstClick + ", gameCount " +gameCount + ", options lenght" + wordOptions.length );
-      // if (firstClick == 0 && gameCount < wordOptions.lenght - 1 ) {
-        if (firstClick == 0 ) {
-          console.log("inside firstclick = 0 and games left to play")
+       userInp = event.keyCode;
+     
+      console.log(userInp + " userInp before transform" );
+   
+ 
+// Check to see if this is the first time input was received and set up initial parameters
+   if (firstClick == 0 ) {
+          console.log("inside firstclick = 0 and games left to play");
           guessCount = 10;
           lettersGuess = [" "]; // array of all letters guessed so far
           firstClick++;
           gameCount ++;
-    		  console.log("user key hit to start game game count" + gameCount);
+          console.log("user key hit to start game game count" + gameCount);
           selectWord(wordsPlayed);
-          console.log("word back to key" + currentWord.toString());
+
           setWordDisplay(currentWord);
-          console.log("word back to key " + correctLetters.toString());
+           console.log("letters to be displayed returned to program "+ correctLetters.toString());
           instruct = "Please take a guess";
           displayStatus(instruct, winCount, lossCount, guessCount, lettersGuess, correctLetters);}
 
+
+     if  (checkUserInput(userInp)) {
+
+         userInp = String.fromCharCode(event.keyCode).toLowerCase(); 
+         console.log("*****" +userInp + " userInp after transform" );
+      // if (firstClick == 0 && gameCount < wordOptions.lenght - 1 ) {
+     
       // else if (firstClick == 0 && gameCount > wordOptions.lenght - 1 ) {
       //    console.log("inside firstclick = 0 and NOOOO games left to play")
       //     guessCount = 10;
       //      gameCount = 0;
       //      instruct = "You have guessed all the words!  Thank you for playing";
-      //      displayStatus(instruct, winCount, lossCount, guessCount, lettersGuess, correctLetters);}
-      
-
-      else { 
+      //      displayStatus(instruct, winCount, lossCount, guessCount, lettersGuess, correctLetters) 
           
-          var userInp = event.key;
+          
           console.log("game being played.  User input " + userInp);
           console.log("lettersGuess index " + lettersGuess.indexOf(userInp));
           console.log("message displayed " + instruct);
 
           if (lettersGuess.indexOf(userInp) == -1 ) { //if letter not already guessed
-       //Sets loop for as long as a guess is available
-      // for (n = guessCount; n > 0; n--) { //do it here or at the end?
               console.log("letter was not guessed already");
+
               lettersGuess.push(userInp);   // add letter to array of guesses
                 
-              if (currentWord.indexOf(userInp) !== -1) { //check to see if the letter input is in word being guessed
-                console.log("letter is in word");
+              //check to see if the letter input is in word being guessed and populate it to be displayed
+                
+              var found = false;
                 for (var c = 0; c < currentWord.length; c++) {
-                        if (currentWord[c] == userInp) {
-                          correctLetters[c] = userInp;
+                        var lowerCase = currentWord[c].toLowerCase();
+                        if (lowerCase == userInp) {
+                          console.log(correctLetters[c]);
+                          correctLetters[c] = currentWord[c];
+                          console.log("letter is in word");
+                          found = true;
+
                         }
                 }
-              } else {
+              if (!found) {
                 console.log("letter is not in word");
                 guessCount--;                 // subtract # of guesses
               }
-           } else {
-                console.log("letter was guessed already");
+          
         
           }
+        }
                 console.log("finished loop");
 
               if (correctLetters.indexOf("_") == -1) {
@@ -170,7 +206,7 @@
               }  
            
                  displayStatus(instruct, winCount, lossCount, guessCount, lettersGuess, correctLetters);
-          }
+          
        }
     
 
