@@ -1,6 +1,54 @@
 body {
 	background-color: black;
 	color: white;
+	font-family: 'Abril Fatface', cursive;
+	font-size: 20px;
+	
+	line-height: 2;
+
 }
 
-img { width: 100px; }
+h1 {
+font-family: 'Creepster', cursive;
+font-weight: 500;
+font-size: 150px;
+line-height: 1.5;
+color: #1BABA8;
+padding-bottom: 64px;
+}
+
+h2 {
+
+	font-family: 'Fruktur', cursive;
+	font-size: 80px;
+	color: #E8944A;
+	margin-left:-20px;
+    -ms-transform: rotate(-20deg); /* IE 9 */
+    -webkit-transform: rotate(-20deg); /* Safari */
+    transform: rotate(-20deg); 
+}
+
+#showCase {
+	font-size: 30px;
+}
+
+
+#wrapper {
+	border-style:solid;
+	border-color: white;
+	border-width: 2px;
+	border-radius: 25px;
+	border-style: groove;
+}
+
+#wrapperLeft{
+	border-left: 2px;
+	border-style:solid;
+	border-color: white;
+
+
+}
+
+
+img { padding-top: 10px; }
+

@@ -2,35 +2,89 @@
 <html>
 <head>
    <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Hangman</title>
+
       <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cerulean/bootstrap.min.css">
+	  <link href="https://fonts.googleapis.com/css?family=Creepster|Fruktur|Pacifico|Abril+Fatface" rel="stylesheet">
 	  <link rel="stylesheet" type="text/css" href="assets/css/style.css">
 	<title></title>
 </head>
+
+
 <body>
 
-<div id = "show"><img src="assets/images.jpg"></div>
-<div id = "music"></div>
-<h1 id = "instruction"></h1>
-<p> wins = </p><span  id = "winDisplay"></span>
-<p> Losses: </h2><span id= "lossDisplay"></span>
-
-<div>
-	<p> current word: </p>
-	<h2  id = "wordDisplay"> </h2>
-</div>
- <div>
-	<p> Number of guesses remaining </p>
-	<h2  id = "guessesDisplay"> </h2>
-</div>
-<div>
-	<p> Letters Guessed</p>
-	<h4 id = "usedLetters"> </h4>
-	<
+<!-- Display heading -->
+<div class = "container">
+	<div id = "row">
+	  <div class= " col-xs-12">
+		<h1 class = "text-center">  HANGMAN </h1>
+		<div class = "carousel-caption">
+			<h2>  80's Sitcoms </h2>
+		</div>
+	</div>
+		<div class = col-xs-1 col-md-5>
+			<h3 id = show></h3>
+	     </div>
+	</div>
 </div>
 
 
+<div class="container-fluid">
+    <div id = "row">
+	   <div class= " col-xs-10 col-xs-offset-1">
+	   </div>
+	 </div>	
+	   
+	<div id = "row"> 
+	  
+	   <div class= " col-xs-10 col-xs-offset-1">
+	 <div id="wrapper" class = "container border">   
+ 	      <div id = row>
+	        <div class= " col-xs-10 col-xs-offset-1 col-md-4 col-md-offset-1">
+				<div id = "show">
+			    </div>
+				<div class= " col-xs-10 col-xs-offset-1 col-md-8 col-md-offset-2">
+					<img src="assets/images.jpg" alt = "Hangman TV sitcom" class= "img-responsive ">
+			    </div>
+			</div>
+		
+			<div  id="wrapperLeft" class= " col-xs-10  col-md-5 col-md-offset-1">
+        
+            <div class= "col-xs-10 col-xs-offset-1 col-md-10 col-md-offset-1  text-center">
+            
+				<div id = "instruction"> 
+		 		</div>
+				<p> Wins </p><span  id = "winDisplay"></span>
+				<p> Losses </p><span id= "lossDisplay"></span>
 
-  <script src="assets/javascript/game.js"></script>
+				<div>
+					<p> Current Word </p>
+					<div  id = "wordDisplay"  > </div>
+				</div>
+				 <div>
+					<p> Number of guesses remaining </p>
+					<p  id = "guessesDisplay"> </p>
+				</div>
+				<div>
+					<p> Letters Guessed</p>
+					<h4 id = "usedLetters"> </h4>
+					
+				</div>
+			   </div> 
+			</div>
+		</div>
+	 </div>
+   </div>
+
+</div>
+
+
+
+<script src="assets/javascript/game.js"></script>
+
 </body>
+
 </html>
