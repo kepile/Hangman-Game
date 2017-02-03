@@ -23,9 +23,9 @@ function displayStatus(inst, win, loss, guess, lttr, word, cWord, display, res, 
     console.log(res);
     var formatLetter = "";
      var showHeading;
-    // Format the words for output
+     //Format and display name of show for heading if the game is over. Remove it if a new game is being played
     var formatWord = formatArray(word);
-    //Format and display name of show for heading if the game is over. Remove it if a new game is being played
+   
     console.log("display is " + display);
     if (display) {
      
@@ -177,7 +177,7 @@ function displayStatus(inst, win, loss, guess, lttr, word, cWord, display, res, 
               },
 
             "Growing Pains" : {
-                picture: "../images/Growing.jpg",
+                picture: "../images/growing.jpg",
                 song: ""
               }
 

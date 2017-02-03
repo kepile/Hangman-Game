@@ -49,11 +49,11 @@ h2 {
 	border-color: white;
 	border-width: 2px;
 	border-radius: 25px;
-	border-style: groove;
+	/*border-style: groove;*/
 }
 
 #wrapperLeft{
-	border-left: 2px;
+	border: 2px;
 	border-style:solid;
 	border-color: white;
 
@@ -64,3 +64,8 @@ h2 {
 img { padding-top: 45px;
  height: 150px;}
 
+@media screen and (max-width: 1000px) {
+
+	#wrapperLeft {
+		border-left:none;
+	}
