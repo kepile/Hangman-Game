@@ -18,37 +18,20 @@ function formatArray (word) {
 
 
  // Sends current values to the web page including instructions, # wins, # losses, # guesses, lettr guessed .
-function displayStatus(inst, win, loss, guess, lttr, word, cWord, display, res, imgDisplay) {
+function displayStatus(inst, win, loss, guess, lttr, word, cWord, display) {
 
-    console.log(res);
     var formatLetter = "";
-     var showHeading;
     // Format the words for output
     var formatWord = formatArray(word);
     //Format and display name of show for heading if the game is over. Remove it if a new game is being played
     console.log("display is " + display);
     if (display) {
-     
-      var cstring = "";
-      for (var i = 0; i< cWord.length; i++) {
-               cstring += cWord[i];}    
-
-      console.log(cstring);
-      // var audio = new Audio(res[cstring].song);
-      // audio.play();
-      // var temp = "<img src = " + 'imgres[cstring].picture' + ">";
-        imgDisplay =  res[cstring].picture;
-         showHeading = formatArray(cWord); 
-        console.log(imgDisplay + " heading " + showHeading);
-      
-
+      var showHeading = formatArray(cWord); 
+      console.log(showHeading);
     } else {
-        showHeading = " ";
-          console.log(imgDisplay + " heading " + showHeading);
-          imgDisplay = "../images/tv.jpg";}
+      var showHeading = " ";}
+    document.getElementById ("showName").innerHTML = showHeading;
 
-    
-    
     // Take the array of guessed letters, format it and store as a string
     for (var r = 0; r < lttr.length; r++) {
       if (r > 1) {
@@ -56,15 +39,12 @@ function displayStatus(inst, win, loss, guess, lttr, word, cWord, display, res, 
         formatLetter += lttr[r];    
     }
 
-		document.getElementById ("showName").innerHTML = showHeading;   
-    document.getElementById("myImg").src = "assets/images/"+imgDisplay;
-    document.getElementById ("instruction").innerHTML = inst; 	
+		document.getElementById ("instruction").innerHTML = inst; 	
     document.getElementById ("winDisplay").innerHTML = win;   
     document.getElementById ("lossDisplay").innerHTML = loss;   
     document.getElementById ("wordDisplay").innerHTML = formatWord;   
     document.getElementById ("guessesDisplay").innerHTML = guess;   
     document.getElementById ("usedLetters").innerHTML = formatLetter; 
-    return imgDisplay;
     // document.getElementByID ("music").innerHTML = 
 }
 
@@ -139,7 +119,6 @@ function displayStatus(inst, win, loss, guess, lttr, word, cWord, display, res, 
       var winCount = 0;
       var lossCount = 0;
       var gameCount = 0;
-      var imgDisplay;
      
       var wordOptions = ["Golden Girls", "The Cosby Show", "The Facts of Life", "Cheers", "Family Ties", "Growing Pains"];
       // var musicstored = "http://www.sitcomsonline.com/sounds/thegoldenpalace.mp3";
@@ -152,32 +131,32 @@ function displayStatus(inst, win, loss, guess, lttr, word, cWord, display, res, 
       var displayWord = false;
        var results = {
             "The Golden Girls" : {
-                picture: "../images/goldengirls.jpg",
-                song: "https://www.televisiontunes.com/Golden_Girls.html"
+                picture: "goldengirls.jpg",
+                song: ""
               },
 
              "The Cosby Show" : {
-                picture: "../images/cosby.jpg",
-                song: "https://www.televisiontunes.com/The_Cosby_Show_-_1984_%28The%29.html"
+                picture: "thecosbyshow.jpg",
+                song: ""
               },
 
             "The Facts of Life" : {
-                picture: "../images/fol.jpg",
-                song: "https://www.televisiontunes.com/uploads/audio/Facts Of Life.mp3"
+                picture: "thecosbyshow.jpg",
+                song: ""
               },
 
             "Cheers" : {
-                picture: "../images/cheers.jpg",
+                picture: "thecosbyshow.jpg",
                 song: ""
               },
 
             "Family Ties" : {
-                picture: "../images/ties.jpg",
+                picture: "thecosbyshow.jpg",
                 song: ""
               },
 
             "Growing Pains" : {
-                picture: "../images/Growing.jpg",
+                picture: "thecosbyshow.jpg",
                 song: ""
               }
 
@@ -188,8 +167,8 @@ function displayStatus(inst, win, loss, guess, lttr, word, cWord, display, res, 
 
 
  // Display initial instructs on the screen
-  //  instruct = "Press any key to get started";
-	 // displayStatus(instruct, winCount, lossCount, guessCount, lettersGuess, correctLetters, currentWord, displayWord, results);
+   instruct = "Press any key to get started";
+	 displayStatus(instruct, winCount, lossCount, guessCount, lettersGuess, correctLetters, currentWord, displayWord);
    
  
    // This function is run whenever the user presses a key 
@@ -201,14 +180,12 @@ function displayStatus(inst, win, loss, guess, lttr, word, cWord, display, res, 
    
     // Check to see if this is the beginning of a new game and set up initial parameters
    if (firstClick == 0) {
-        
-
           console.log("gameCount is " + gameCount);
          if (gameCount >= wordOptions.length-1) {
              console.log("GAME IS OVER GAME IS OVER GAME IS OVER GAME IS OVER");
               instruct = "<p>You have played too many times.  </p>";
               instruct += "<p>Get a Life!</p>"
-              displayStatus(instruct, winCount, lossCount, guessCount, lettersGuess, correctLetters, currentWord, displayWord, imgDisplay);
+              displayStatus(instruct, winCount, lossCount, guessCount, lettersGuess, correctLetters, currentWord, displayWord);
               return;
            }
               
@@ -218,7 +195,6 @@ function displayStatus(inst, win, loss, guess, lttr, word, cWord, display, res, 
           firstClick++;
           gameCount ++;
           displayWord = false;
-          imgDisplay = "../images/fol.jpg";
           currentWord.length = 0  // houses an array of the word being guessed
           correctLetters.lenght = 0; //displays on screen to open and guessed letters in a word console.log("user key hit to start game game count" + gameCount);
           selectWord(wordsPlayed);
@@ -226,7 +202,8 @@ function displayStatus(inst, win, loss, guess, lttr, word, cWord, display, res, 
           setWordDisplay(currentWord);
            console.log("letters to be displayed returned to program "+ correctLetters.toString());
           instruct = "Please take a guess";
-           }
+          // displayStatus(instruct, winCount, lossCount, guessCount, lettersGuess, correctLetters, currentWord);
+        }
 
 
     else if  (checkUserInput(userInp)) {
@@ -284,7 +261,7 @@ function displayStatus(inst, win, loss, guess, lttr, word, cWord, display, res, 
                     displayWord = true;
               }  
            
-                 displayStatus(instruct, winCount, lossCount, guessCount, lettersGuess, correctLetters, currentWord, displayWord, results, imgDisplay);
+                 displayStatus(instruct, winCount, lossCount, guessCount, lettersGuess, correctLetters, currentWord, displayWord);
           
        }
     

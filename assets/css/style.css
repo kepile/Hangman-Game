@@ -11,22 +11,33 @@ body {
 h1 {
 font-family: 'Creepster', cursive;
 font-weight: 500;
-font-size: 150px;
+font-size: 125px;
 line-height: 1.5;
 color: #1BABA8;
-padding-bottom: 64px;
+padding-bottom: 32px;
 }
 
 h2 {
 
 	font-family: 'Fruktur', cursive;
-	font-size: 80px;
+	font-size: 70px;
 	color: #E8944A;
 	margin-left:-20px;
     -ms-transform: rotate(-20deg); /* IE 9 */
     -webkit-transform: rotate(-20deg); /* Safari */
     transform: rotate(-20deg); 
 }
+
+.important {
+	color: red;
+}
+
+.answerFormat {
+	font-family: 'Fruktur', cursive;
+	font-size: 50px;
+	color: #E8944A;
+}
+
 
 #showCase {
 	font-size: 30px;
@@ -50,5 +61,6 @@ h2 {
 }
 
 
-img { padding-top: 10px; }
+img { padding-top: 45px;
+ height: 150px;}
 
