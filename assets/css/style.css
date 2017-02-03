@@ -53,9 +53,10 @@ h2 {
 }
 
 #wrapperLeft{
-	border: 2px;
+	border: 1px;
 	border-style:solid;
 	border-color: white;
+	border-right:none;
 
 
 }
@@ -68,4 +69,8 @@ img { padding-top: 45px;
 
 	#wrapperLeft {
 		border-left:none;
+	
+.answerFormat {
+	font-size: 25px;
+	
 	}

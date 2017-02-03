@@ -33,13 +33,13 @@ function displayStatus(inst, win, loss, guess, lttr, word, cWord, display, res, 
       for (var i = 0; i< cWord.length; i++) {
                cstring += cWord[i];}    
 
-      console.log(cstring);
+      console.log(cstring + "used to retrieve object");
       // var audio = new Audio(res[cstring].song);
       // audio.play();
       // var temp = "<img src = " + 'imgres[cstring].picture' + ">";
         imgDisplay =  res[cstring].picture;
          showHeading = formatArray(cWord); 
-        console.log(imgDisplay + " heading " + showHeading);
+        console.log(imgDisplay +" is in imgDisplay  "+ " heading " + showHeading);
       
 
     } else {
@@ -151,7 +151,7 @@ function displayStatus(inst, win, loss, guess, lttr, word, cWord, display, res, 
       var lowerCaseWord;
       var displayWord = false;
        var results = {
-            "The Golden Girls" : {
+            "Golden Girls" : {
                 picture: "../images/goldengirls.jpg",
                 song: "https://www.televisiontunes.com/Golden_Girls.html"
               },
