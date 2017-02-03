@@ -23,6 +23,7 @@ function displayStatus(inst, win, loss, guess, lttr, word, cWord, display, res, 
     console.log(res);
     var formatLetter = "";
      var showHeading;
+      var audio;
      //Format and display name of show for heading if the game is over. Remove it if a new game is being played
     var formatWord = formatArray(word);
    
@@ -34,9 +35,9 @@ function displayStatus(inst, win, loss, guess, lttr, word, cWord, display, res, 
                cstring += cWord[i];}    
 
       console.log(cstring + "used to retrieve object");
-      // var audio = new Audio(res[cstring].song);
-      // audio.play();
-      // var temp = "<img src = " + 'imgres[cstring].picture' + ">";
+      audio = new Audio(res[cstring].song);
+      audio.play();
+      
         imgDisplay =  res[cstring].picture;
          showHeading = formatArray(cWord); 
         console.log(imgDisplay +" is in imgDisplay  "+ " heading " + showHeading);
@@ -45,7 +46,9 @@ function displayStatus(inst, win, loss, guess, lttr, word, cWord, display, res, 
     } else {
         showHeading = " ";
           console.log(imgDisplay + " heading " + showHeading);
-          imgDisplay = "../images/tv.jpg";}
+          imgDisplay = "../images/tv.jpg";
+           // audio.pause()
+         }
 
     
     
@@ -153,12 +156,12 @@ function displayStatus(inst, win, loss, guess, lttr, word, cWord, display, res, 
        var results = {
             "Golden Girls" : {
                 picture: "../images/goldengirls.jpg",
-                song: "https://www.televisiontunes.com/Golden_Girls.html"
+                song: "https://www.televisiontunes.com/uploads/audio/Golden Girls.mp3"
               },
 
              "The Cosby Show" : {
                 picture: "../images/cosby.jpg",
-                song: "https://www.televisiontunes.com/The_Cosby_Show_-_1984_%28The%29.html"
+                song: "https://www.televisiontunes.com/uploads/audio/The Cosby Show - 1984.mp3"
               },
 
             "The Facts of Life" : {
@@ -168,17 +171,17 @@ function displayStatus(inst, win, loss, guess, lttr, word, cWord, display, res, 
 
             "Cheers" : {
                 picture: "../images/cheers.jpg",
-                song: ""
+                song: "https://www.televisiontunes.com/uploads/audio/Cheers - Short.mp3"
               },
 
             "Family Ties" : {
                 picture: "../images/ties.jpg",
-                song: ""
+                song: "https://www.televisiontunes.com/uploads/audio/Family Ties.mp3"
               },
 
             "Growing Pains" : {
                 picture: "../images/growing.jpg",
-                song: ""
+                song: "https://www.televisiontunes.com/uploads/audio/Growing Pains - Season 1.mp3"
               }
 
 
@@ -204,11 +207,12 @@ function displayStatus(inst, win, loss, guess, lttr, word, cWord, display, res, 
         
 
           console.log("gameCount is " + gameCount);
-         if (gameCount >= wordOptions.length-1) {
+         if (gameCount > wordOptions.length-1) {
              console.log("GAME IS OVER GAME IS OVER GAME IS OVER GAME IS OVER");
-              instruct = "<p>You have played too many times.  </p>";
-              instruct += "<p>Get a Life!</p>"
-              displayStatus(instruct, winCount, lossCount, guessCount, lettersGuess, correctLetters, currentWord, displayWord, imgDisplay);
+              instruct = "You have played too many times. ";
+              instruct += "Get a Life!"
+              document.getElementById ("instruction").innerHTML = instruct; 
+               // displayStatus(instruct, winCount, lossCount, guessCount, lettersGuess, correctLetters, currentWord, displayWord, imgDisplay);
               return;
            }
               
